@@ -3,7 +3,8 @@
 ## v8001.0.1
 
 - Fixed internal bugs related to resource initialization
-- Added support for setting a custom localization bundle and switching the in-app language at runtime
+- In-app language switching: let users pick the scanning UI language from within your app, independent of device settings (`BlinkIDTheme.shared.language`)
+- Custom translations: override SDK copy with your own strings by pointing the theme at a localization bundle in your app
 
 ## v8001.0.0
 
