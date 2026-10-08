@@ -29,3 +29,7 @@ DerivedData
 
 Samples/MicroBlinkDynamic/Release
 *.zip
+
+# Swift Package Manager
+.build/
+.swiftpm/

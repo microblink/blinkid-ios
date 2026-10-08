@@ -22,7 +22,11 @@ struct ContentView: View {
         case .home:
             HomeScreen()
         case .error(let error):
-            Text(error)
+            VStack(spacing: 30) {
+                Text(error)
+                DeleteCachedResourcesButton()
+            }
+            .padding()
         case .success(let scanningResult):
             ScanningResultView(scanningResult: scanningResult)
         case .scanBuiltin(let viewModel):
@@ -52,7 +56,19 @@ struct ContentView: View {
                 Text("Custom UI")
             }
 
+            DeleteCachedResourcesButton()
         }
         .padding()
+    }
+
+    @ViewBuilder
+    private func DeleteCachedResourcesButton() -> some View {
+        Button(role: .destructive) {
+            Task {
+                await viewModel.deleteCachedResources()
+            }
+        } label: {
+            Text("Delete Cached Resources")
+        }
     }
 }

@@ -21,8 +21,8 @@ enum UIState {
 
 @MainActor
 class ViewModel: ObservableObject {
-    // Valid: 2027-01-23
-    private let licenseKey = "sRwDAAEeY29tLm1pY3JvYmxpbmsuRGlyZWN0QVBJU2FtcGxlAQpNaWNyb2JsaW5r7s/u74AMZyT8nEZ+popMxYtKYBLaImASkWkrB3XWwpQ5EG/mpMEjeeuS7ViLs9KP+MJfaHl86SFkifxQ1Bga45OgrUtuC1jrVT0TA67FTVTTQfj1RQ3XS/QievP19kEFg9ueE9PFbSZv0WH2BtVbetP8WnLnWg6C1uqI"
+    // Valid: 2027-04-06
+    private let licenseKey = "sRwDAAEeY29tLm1pY3JvYmxpbmsuRGlyZWN0QVBJU2FtcGxlAQptaWNyb2JsaW5r7s/u74AMZyT8nEZ+PoxMxbbG8UO1KuzJFS7RGV8U6RnWlhc4uZ+pSIZwqSeioD5cCu8H1wX6PBP6jWebaLBnT8P1ncZOF8rV2ChZHvbhnvlWAZurcwJHrW+U+JEbOB36uFW9KPUvTo8qgMt9urriRMdcUiyB2V2QEHOm"
     private var blinkIDsdk: BlinkIDSdk? = nil
     @Published var state: UIState = .loading
     

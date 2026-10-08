@@ -7,15 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		A270C9AD2D8CA9BF00B59082 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A270C9AC2D8CA9BF00B59082 /* BlinkIDUX */; };
-		A270C9B02D8D4D8E00B59082 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A270C9AF2D8D4D8E00B59082 /* BlinkIDUX */; };
-		A270C9B32D8D4E0600B59082 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A270C9B22D8D4E0600B59082 /* BlinkIDUX */; };
-		A270C9B62D8D4EFC00B59082 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A270C9B52D8D4EFC00B59082 /* BlinkIDUX */; };
-		A29A29BA2E6B29D4006A3599 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A29A29B92E6B29D4006A3599 /* BlinkIDUX */; };
-		A2DDD1BF2E2A510C0025214C /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A2DDD1BE2E2A510C0025214C /* BlinkIDUX */; };
-		FF0976F22D8C615E004C7219 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = FF0976F12D8C615E004C7219 /* BlinkIDUX */; };
+		A238FEBC3077E0C7000AD73B /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = A29A29B92E6B29D4006A3599 /* BlinkIDUX */; };
 		FF0976F32D8C6165004C7219 /* BlinkIDUX in Embed Frameworks */ = {isa = PBXBuildFile; productRef = FF0976F12D8C615E004C7219 /* BlinkIDUX */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
-		FF0977AD2D8D6791004C7219 /* BlinkIDUX in Frameworks */ = {isa = PBXBuildFile; productRef = FF0977AC2D8D6791004C7219 /* BlinkIDUX */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -62,14 +55,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A270C9B02D8D4D8E00B59082 /* BlinkIDUX in Frameworks */,
-				A270C9B62D8D4EFC00B59082 /* BlinkIDUX in Frameworks */,
-				FF0976F22D8C615E004C7219 /* BlinkIDUX in Frameworks */,
-				A29A29BA2E6B29D4006A3599 /* BlinkIDUX in Frameworks */,
-				FF0977AD2D8D6791004C7219 /* BlinkIDUX in Frameworks */,
-				A270C9AD2D8CA9BF00B59082 /* BlinkIDUX in Frameworks */,
-				A270C9B32D8D4E0600B59082 /* BlinkIDUX in Frameworks */,
-				A2DDD1BF2E2A510C0025214C /* BlinkIDUX in Frameworks */,
+				A238FEBC3077E0C7000AD73B /* BlinkIDUX in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
