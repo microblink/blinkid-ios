@@ -9,6 +9,7 @@ public enum ReticleState: ReticleStateProtocol {
     case barcode
     case barcodeSide
     case mrzSide
+    case passportDataPage
     case detecting
     case flip
     case error(String)
@@ -32,6 +33,8 @@ public enum ReticleState: ReticleStateProtocol {
             return "mb_barcode_id_instructions"
         case .mrzSide:
             return "mb_mrz_id_instructions"
+        case .passportDataPage:
+            return "mb_passport_scan_data_page_instructions"
         case .flip:
             return "mb_camera_flip_document"
         case .error(let message):
@@ -47,7 +50,7 @@ public enum ReticleState: ReticleStateProtocol {
     
     public var duration: Double {
         switch self {
-        case .front, .back, .barcode, .barcodeSide, .mrzSide:
+        case .front, .back, .barcode, .barcodeSide, .mrzSide, .passportDataPage:
             2.0
         case .detecting:
             1.5
@@ -62,7 +65,7 @@ public enum ReticleState: ReticleStateProtocol {
     
     public var shouldExpire: Bool {
         switch self {
-        case .front, .back, .detecting, .inactive, .flip, .barcode, .barcodeSide, .mrzSide:
+        case .front, .back, .detecting, .inactive, .flip, .barcode, .barcodeSide, .mrzSide, .passportDataPage:
             return false
         case .error(_):
             return true
@@ -73,7 +76,7 @@ public enum ReticleState: ReticleStateProtocol {
     
     public var canBeFallback: Bool {
         switch self {
-        case .front, .back, .barcode, .barcodeSide, .mrzSide, .passport(_), .inactiveWithMessage(_):
+        case .front, .back, .barcode, .barcodeSide, .mrzSide, .passportDataPage, .passport(_), .inactiveWithMessage(_):
             return true
         case .flip, .inactive, .error(_), .detecting:
             return false
@@ -97,7 +100,7 @@ public enum ReticleState: ReticleStateProtocol {
             return .error
         case .detecting:
             return .detecting
-        case .front, .back, .barcode, .barcodeSide, .mrzSide, .passport(_):
+        case .front, .back, .barcode, .barcodeSide, .mrzSide, .passportDataPage, .passport(_):
             return .spinning
         }
     }

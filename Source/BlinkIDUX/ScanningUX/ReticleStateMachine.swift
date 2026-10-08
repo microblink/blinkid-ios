@@ -83,6 +83,8 @@ public class ReticleStateMachine: ReticleStateMachineProtocol {
             return .front
         case .documentWithMrz:
             return .mrzSide
+        case .passportOnly:
+            return .passportDataPage
         }
     }
     

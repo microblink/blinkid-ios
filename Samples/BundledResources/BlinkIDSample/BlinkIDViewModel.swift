@@ -25,8 +25,8 @@ enum UIState {
 @MainActor
 final class BlinkIDViewModel: ObservableObject {
     
-    // Valid until: 2026-07-23
-    private let licenseKey = "sRwDAAEcY29tLm1pY3JvYmxpbmsuQmxpbmtJRFNhbXBsZQEKTWljcm9ibGlua/+x1ICxGUwNkNF+/JxLO/vUNIsScZrY7CXCqZfENG4VXeDLY+pqZAftEffSx27sgsHCSSkPF1stONYcsZzo8sHHccKwzmB2tCkGwJswiVv7nnOj1BNBIsAu4f86cfIakdJ1uk8Z61XkIxV8JedM3inYN7ntkX8Oz1EQlg=="
+    // Valid until: 2027-04-06
+    private let licenseKey = "sRwDAAEcY29tLm1pY3JvYmxpbmsuQmxpbmtJRFNhbXBsZQEKbWljcm9ibGlua/+x1ICxGUwNkNF+/ARNO/ted2leNDHQy6TuPaGWXV/8d/qHl83r5SJg1aoxUwAwL1n16fnt13NPC2k9PPytKKoBnVgyAX0tvKOo3D0CMvh0olsndQFDmEoZ5ot+hGj00irxeDa/Ny71+pSdoAkyArC/9d5MSehGTeMPiw=="
     private var sdkInstance: BlinkIDSdk?
     private var cancellables = Set<AnyCancellable>()
     @Published var state: UIState = .loading
@@ -43,12 +43,21 @@ final class BlinkIDViewModel: ObservableObject {
             let otaResourcesConfig = OTAResourcesConfig(bundleUrl: Bundle.main.bundleURL)
             let settings = BlinkIDSdkSettings(licenseKey: licenseKey, resourcesConfiguration: resourcesConfig, otaResourcesConfiguration: otaResourcesConfig)
             sdkInstance = try await BlinkIDSdk.createBlinkIDSdk(withSettings: settings)
+            state = .home
         } catch {
+            print("BlinkID SDK initialization failed: \(error)")
             state = .error(error.localizedDescription)
         }
-        state = .home
     }
     
+    func deleteCachedResources() async {
+        state = .loading
+        sdkInstance = nil
+        await BlinkIDSdk.terminateBlinkIDSdk()
+        BlinkIDSdk.deleteCachedResources()
+        await initializeSdk()
+    }
+
     func performScan(customScan: Bool = false) async {
         guard let sdkInstance = sdkInstance
         else {
@@ -105,16 +114,3 @@ final class BlinkIDViewModel: ObservableObject {
         )
     }
 }
-
-/*
- func initializeSdk() async {
-     do {
-         let resourcesConfig = ResourcesConfig(download: false, bundleUrl: Bundle.main.bundleURL)
-         let settings = BlinkIDSdkSettings(licenseKey: licenseKey, resourcesConfiguration: resourcesConfig)
-         sdkInstance = try await BlinkIDSdk.createBlinkIDSdk(withSettings: settings)
-     } catch {
-         state = .error(error.localizedDescription)
-     }
-     state = .home
- }
- */

@@ -122,6 +122,51 @@ enum DocumentBarcodeOnboardingStep: Int, OnboardingStepProtocol {
     }
 }
 
+enum PassportOnlyOnboardingStep: Int, OnboardingStepProtocol {
+    case openPassport, allFieldsVisible, harshLight, keepStill
+
+    var id: Int { rawValue }
+
+    var image: Image {
+        switch self {
+        case .openPassport:
+            return Image.passportHelpShowDataImage
+        case .allFieldsVisible:
+            return Image.passportAllFieldsVisibleImage
+        case .harshLight:
+            return Image.passportHarshLightImage
+        case .keepStill:
+            return Image.passportKeepStillImage
+        }
+    }
+
+    var title: String {
+        switch self {
+        case .openPassport:
+            return "mb_passport_help_open_passport_title"
+        case .allFieldsVisible:
+            return "mb_help_screen_title1"
+        case .harshLight:
+            return "mb_help_screen_title2"
+        case .keepStill:
+            return "mb_help_screen_title3"
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .openPassport:
+            return "mb_passport_help_open_passport_subtitle"
+        case .allFieldsVisible:
+            return "mb_help_screen_msg1"
+        case .harshLight:
+            return "mb_help_screen_msg2"
+        case .keepStill:
+            return "mb_help_screen_msg3"
+        }
+    }
+}
+
 enum DocumentMrzOnboardingStep: Int, OnboardingStepProtocol {
     case keepMrzVisible, harshLight, keepStill
 

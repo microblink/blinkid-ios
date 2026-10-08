@@ -74,4 +74,24 @@ extension Image {
     static var keepMrzVisibleImage: Image {
         Image("keep_mrz_visible_id", bundle: Bundle.frameworkBundle)
     }
+
+    static var passportOnboardingImage: Image {
+        Image("passport_onboarding", bundle: Bundle.frameworkBundle)
+    }
+
+    static var passportHelpShowDataImage: Image {
+        Image("passport_help_show_data", bundle: Bundle.frameworkBundle)
+    }
+
+    static var passportAllFieldsVisibleImage: Image {
+        Image("passport_all_fields_visible", bundle: Bundle.frameworkBundle)
+    }
+
+    static var passportHarshLightImage: Image {
+        Image("passport_harsh_light", bundle: Bundle.frameworkBundle)
+    }
+
+    static var passportKeepStillImage: Image {
+        Image("passport_keep_still", bundle: Bundle.frameworkBundle)
+    }
 }

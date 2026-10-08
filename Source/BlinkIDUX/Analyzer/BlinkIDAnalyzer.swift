@@ -44,9 +44,58 @@ public protocol BlinkIDClassFilter {
     func classAllowed(classInfo: BlinkIDSDK.DocumentClassInfo) -> Bool
 }
 
+extension BlinkIDSDK.DocumentClassInfo {
+    /// Whether the recognizer has classified anything at all.
+    ///
+    /// - Note: `isEmpty()` requires country, region **and** document type to be present, but most
+    ///         countries have no sub-region, so it reports an empty class for a fully classified
+    ///         document - a Croatian ID, for example. Class filtering must not depend on it.
+    ///                                                          (18.9.2026. Jura Skrlec)
+    var isClassified: Bool {
+        if let countryId = country?.countryId, countryId != .none { return true }
+        if let regionId = region?.regionId, regionId != .none { return true }
+        if let documentTypeId = documentType?.documentTypeId, documentTypeId != .none { return true }
+        return false
+    }
+}
+
+/// Allows only passport booklets, and optionally narrows the result further with a
+/// client provided filter.
+///
+/// Used when the analyzer is created with `passportOnly: true`.
+struct PassportOnlyClassFilter: BlinkIDClassFilter {
+    /// Passport booklets have a data page that can be opened, unlike `passportCard`.
+    static let allowedDocumentTypes: Set<DocumentTypeID> = [
+        .passport,
+        .alienPassport,
+        .consularPassport,
+        .minorsPassport,
+        .refugeePassport,
+        .emergencyPassport,
+        .temporaryPassport
+    ]
+
+    /// Client provided filter, applied only to classes that passed the passport check.
+    let additionalFilter: (any BlinkIDClassFilter)?
+
+    func classAllowed(classInfo: BlinkIDSDK.DocumentClassInfo) -> Bool {
+        /// The document type can still be unresolved while the country is already known.
+        /// Don't judge the class until there is a type to judge.
+        guard let documentTypeId = classInfo.documentType?.documentTypeId,
+              documentTypeId != .none else { return true }
+
+        guard Self.allowedDocumentTypes.contains(documentTypeId) else { return false }
+        return additionalFilter?.classAllowed(classInfo: classInfo) ?? true
+    }
+}
+
 public enum BlinkIDExtractionMode: Sendable {
-    case barcodeOnly, documentWithBarcode, fullDocument, documentWithMrz
-    
+    case barcodeOnly, documentWithBarcode, fullDocument, documentWithMrz, passportOnly
+
+    /// Derives the extraction mode from the resolved session settings.
+    ///
+    /// - Note: `passportOnly` is never derived here. It is a UX level flow which the analyzer
+    ///         sets explicitly when it is created with `passportOnly: true`.
     init(sessionSettings: BlinkIDSessionSettings) {
         if sessionSettings.scanningSettings.documentCaptureModule == nil,
            sessionSettings.scanningSettings.barcodeModule != nil,
@@ -110,20 +159,35 @@ public actor BlinkIDAnalyzer: CameraFrameAnalyzer {
     
     // MARK: -
 
+    /// - Parameters:
+    ///   - passportOnly: Restricts the flow to passport scanning. All document classes that are
+    ///     not a passport booklet are rejected, and the UX guides the user to the passport data
+    ///     page instead of the front side of a document.
+    ///
+    ///     Takes precedence over the extraction mode derived from `blinkIdSessionSettings`, and
+    ///     is applied on top of `classFilter` - a class has to pass both filters to be allowed.
+    ///
+    ///     Whether the second passport page is requested is still governed by
+    ///     `DocumentCaptureModuleSettings.passportDataPageScanOnly`.
     public init(
         sdk: BlinkIDSdk,
         blinkIdSessionSettings: BlinkIDSessionSettings = BlinkIDSessionSettings(inputImageSource: .video),
         eventStream: BlinkIDEventStream = BlinkIDEventStream(),
+        passportOnly: Bool = false,
         classFilter: (any BlinkIDClassFilter)? = nil,
         redactionSettingsResolver: (any RedactionSettingsResolver)? = nil
     ) async throws {
         self.session = try await sdk.createScanningSession(sessionSettings: blinkIdSessionSettings)
         self._sessionNumber = await session.getSessionNumber()
-        self._extractionMode = BlinkIDExtractionMode(sessionSettings: await session.getResolvedSessionSettings())
+        self._extractionMode = passportOnly
+            ? .passportOnly
+            : BlinkIDExtractionMode(sessionSettings: await session.getResolvedSessionSettings())
         self.eventStream = eventStream
         self.stepTimeoutDuration = blinkIdSessionSettings.stepTimeoutDuration
         self.inactivityTimeoutDuration = blinkIdSessionSettings.inactivityTimeoutDuration
-        self.classFilter = classFilter
+        self.classFilter = passportOnly
+            ? PassportOnlyClassFilter(additionalFilter: classFilter)
+            : classFilter
         self.redactionSettingsResolver = redactionSettingsResolver
     }
 
@@ -167,7 +231,7 @@ public actor BlinkIDAnalyzer: CameraFrameAnalyzer {
             let frameProcessResult = try await session.process(inputImage: inputImage)
             
             if let classInfo = frameProcessResult.processResult?.inputImageAnalysisResult.documentClassInfo,
-               !classInfo.isEmpty(),
+               classInfo.isClassified,
                let filter = classFilter {
                 if !filter.classAllowed(classInfo: classInfo) {
                     /// - Note: scanInterrupted returns alert type in continuation which results in presenting an alert.
@@ -220,7 +284,7 @@ public actor BlinkIDAnalyzer: CameraFrameAnalyzer {
                 
                 Task { @ProcessingActor in
                     let redactionSettings: RedactionSettings? = {
-                        guard let resolver, let classInfo, !classInfo.isEmpty() else { return nil }
+                        guard let resolver, let classInfo, classInfo.isClassified else { return nil }
                         return resolver.resolveRedactionSettings(classInfo: classInfo)
                     }()
                     
