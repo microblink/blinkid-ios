@@ -91,23 +91,18 @@ public final class BlinkIDUXModel: ScanningViewModel<BlinkIDScanningResult, UIEv
             for await events in await analyzer.events.stream {
                 if events.contains(.requestDocumentSide(side: .back)) {
                     firstSideScanned(frontFlipImage: Image.frontIdImage, backFlipImage: Image.backIdImage, flipState: .flip, nextState: .back)
-                    cancelTooltipTimer()
                 }
                 else if events.contains(.requestDocumentSide(side: .passport(.none))) {
                     passportSideScanned(.none)
-                    cancelTooltipTimer()
                 }
                 else if events.contains(.requestDocumentSide(side: .passport(.right90))) {
                     passportSideScanned(.right90)
-                    cancelTooltipTimer()
                 }
                 else if events.contains(.requestDocumentSide(side: .passport(.left90))) {
                     passportSideScanned(.left90)
-                    cancelTooltipTimer()
                 }
                 else if events.contains(.requestDocumentSide(side: .passportBarcode)) {
                     passportWithBarcodeSideScanned()
-                    cancelTooltipTimer()
                 }
                 else if events.contains(.requestDocumentSide(side: .barcode)) {
                     self.setReticleState(.barcode, force: true)

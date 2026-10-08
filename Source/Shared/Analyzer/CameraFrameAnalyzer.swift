@@ -82,9 +82,3 @@ public protocol CameraFrameAnalyzer<Frame, Event> : Sendable {
     
     var sessionNumber: Int { get }
 }
-
-public extension CameraFrameAnalyzer {
-    /// Default no-op so analyzers without resumable step-timer semantics
-    /// don't need to implement anything.
-    func resetStepTimer() async {}
-}

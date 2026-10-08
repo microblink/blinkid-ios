@@ -303,6 +303,9 @@ public class ScanningViewModel<T, U, V: ReticleStateMachineProtocol, A: AlertTyp
     }
     
     public func pauseScanning() {
+        cancelTooltipTimer()
+        hideTooltipInvoked()
+        
         Task {
             await analyzer.pause()
         }
@@ -367,18 +370,14 @@ public class ScanningViewModel<T, U, V: ReticleStateMachineProtocol, A: AlertTyp
     // MARK: - Tooltip Management
     
     func startTooltipTimer() {
+        guard uxSettings.helpTooltipShowDelay > 0 else { return }
+        
         showTooltipTimer?.invalidate()
         showTooltip = false
         
         Task {
-            var interval = await analyzer.inactivityTimeoutDuration / 2.0
-            
-            if interval <= 0 {
-                interval = 8.0
-            }
-            
             await MainActor.run {
-                showTooltipTimer = Timer.scheduledTimer(withTimeInterval: interval, repeats: false, block: { [weak self] _ in
+                showTooltipTimer = Timer.scheduledTimer(withTimeInterval: uxSettings.helpTooltipShowDelay, repeats: false, block: { [weak self] _ in
                     Task {
                         await self?.showTooltipInvoked()
                     }
@@ -402,7 +401,9 @@ public class ScanningViewModel<T, U, V: ReticleStateMachineProtocol, A: AlertTyp
     
     @MainActor
     private func startHideTooltipTimer() {
-        hideTooltipTimer = Timer.scheduledTimer(withTimeInterval: 5.0, repeats: false, block: { [weak self] _ in
+        guard uxSettings.helpTooltipHideDelay > 0 else { return }
+        
+        hideTooltipTimer = Timer.scheduledTimer(withTimeInterval: uxSettings.helpTooltipHideDelay, repeats: false, block: { [weak self] _ in
             Task {
                 await self?.hideTooltipInvoked()
             }

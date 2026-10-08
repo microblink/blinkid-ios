@@ -32,6 +32,8 @@ private struct BlinkIDUXContentView: View, ScanningUXProtocol, PassportAnimatabl
             return Array(DocumentBarcodeOnboardingStep.allCases)
         case .documentWithMrz:
             return Array(DocumentMrzOnboardingStep.allCases)
+        case .passportOnly:
+            return Array(PassportOnlyOnboardingStep.allCases)
         case .fullDocument, nil:
             return Array(FullDocumentOnboardingStep.allCases)
         }
@@ -56,6 +58,12 @@ private struct BlinkIDUXContentView: View, ScanningUXProtocol, PassportAnimatabl
                 title: "mb_onboarding_dialog_mrz_id_title",
                 description: "mb_onboarding_dialog_mrz_id_message",
                 image: Image.locateMrzIdImage
+            )
+        case .passportOnly:
+            return OnboardingAlertContent(
+                title: "mb_passport_onboarding_title",
+                description: "mb_passport_onboarding_subtitle",
+                image: Image.passportOnboardingImage
             )
         case .fullDocument, nil:
             return OnboardingAlertContent(
