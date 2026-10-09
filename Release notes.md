@@ -1,5 +1,10 @@
 # Release notes
 
+## v8002.0.1
+
+### Bug fixes
+- Xcode 26 compatibility: Fixed an issue where the `BlinkID` Swift interface built with Xcode 27 (Swift 6.4) could not be parsed by Xcode 26 and earlier, causing build failures. The SDK can again be integrated with all Xcode versions listed in the requirements.
+
 ## v8002.0.0
 
 ### What's new
