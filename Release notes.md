@@ -1,5 +1,8 @@
 # Release notes
 
+## v8002.0.3
+- Bugfixes and improvements
+
 ## v8002.0.2
 
 ### Bug fixes
@@ -1205,7 +1208,7 @@ We’re excited to introduce BlinkID v7, a major upgrade designed to simplify yo
   - `...`
   
 ## Plan Your Upgrade
-We have prepared a [Transition guide](https://github.com/BlinkID/blinkid-ios/blob/master/Transition%20guide%20v7.md) to help you get started with BlinkID v7.0. It outlines all major API changes and best practices for migrating existing code. Read the transition guide here. For any questions or feedback, reach out to support@microblink.com. We value your input and look forward to hearing how BlinkID v7 improves your app’s experience! 
+We have prepared a [Transition guide](https://github.com/microblink/blinkid-ios/blob/master/Transition%20guide%20v7.md) to help you get started with BlinkID v7.0. It outlines all major API changes and best practices for migrating existing code. Read the transition guide here. For any questions or feedback, reach out to support@microblink.com. We value your input and look forward to hearing how BlinkID v7 improves your app’s experience! 
 
 ## 6.13.0
 
@@ -2619,7 +2622,7 @@ We’ve added 61 new documents:
     - Personal identification number on South Korea paper bio-data page Passport
 
 ### Fixes
-- We've fixed the orientation of an image obtained via [captureHighResImage](http://blinkid.github.io/blinkid-ios/Protocols/MBRecognizerRunnerViewController.html#/c:objc(pl)MBRecognizerRunnerViewController(im)captureHighResImage:) 
+- We've fixed the orientation of an image obtained via [captureHighResImage](http://microblink.github.io/blinkid-ios/Protocols/MBRecognizerRunnerViewController.html#/c:objc(pl)MBRecognizerRunnerViewController(im)captureHighResImage:) 
 - We've fixed minor UI/layout issues on phones with the notch
 
 ## 5.12.0
@@ -3130,7 +3133,7 @@ We’ve added 98 new documents:
     * It can be disabled by setting `showFlashlightWarning` property to NO/false on `MBBlinkIdOverlaySettings`
 * We added `MBBlinkIdOverlayViewController` customization:
     * Set font, text color, corner radius and custom images
-    * Use [`MBBlinkIdOverlayTheme`](https://blinkid.github.io/blinkid-ios/Classes/MBBlinkIdOverlayTheme.html)
+    * Use [`MBBlinkIdOverlayTheme`](https://microblink.github.io/blinkid-ios/Classes/MBBlinkIdOverlayTheme.html)
 
 ### New additions to our supported documents list
 #### Plastic page passports
@@ -3153,7 +3156,7 @@ We added support for scanning the visual inspection zone - VIZ includes everythi
 * **Sweden** Passport
 * **Turkey** Passport (BETA)
 
-If you need to scan the MRZ only, you can always set the "MRZ Passport" [recognition mode](https://blinkid.github.io/blinkid-ios/Classes/MBRecognitionModeFilter.html#/c:objc(cs)MBRecognitionModeFilter(py)enableMrzPassport).
+If you need to scan the MRZ only, you can always set the "MRZ Passport" [recognition mode](https://microblink.github.io/blinkid-ios/Classes/MBRecognitionModeFilter.html#/c:objc(cs)MBRecognitionModeFilter(py)enableMrzPassport).
 ​
 #### Vertical US documents
 * **California** ID
@@ -3281,7 +3284,7 @@ BlinkID extracts data from driver’s licenses that contain single line MRZ:
 
 ### Major bug fix:
 
-- This version fixes bug introduced in [v5.7.0](https://github.com/BlinkID/blinkid-ios/releases/tag/v5.7.0) which could cause SDK crash on `applicationDidBecomeActive` event.
+- This version fixes bug introduced in [v5.7.0](https://github.com/microblink/blinkid-ios/releases/tag/v5.7.0) which could cause SDK crash on `applicationDidBecomeActive` event.
 
 ### New features:
 
@@ -3310,7 +3313,7 @@ BlinkID extracts data from driver’s licenses that contain single line MRZ:
         - `enableMrzVisa` lets you scan MRZ on visa documents.
         - `enableMrzPassport` lets you scan MRZ on passports.
         - `enablePhotoId` lets you scan photo IDs. Use it to enable or disable document and face image extraction on unsupported documents.
-        - `enableFullRecognition` lets you scan all data from our [supported](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) documents.
+        - `enableFullRecognition` lets you scan all data from our [supported](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) documents.
         - Your license key still controls which of the above recognition modes are allowed.
     - We have added a `MBRecognitionMode` result member describing which recognition mode was used to produce the results.
     -  We are now retrieving sex and nationality fields from the MRZ in cases where those two fields cannot be found in the document’s VIZ. Previously, we only used to do this for dates, name fields and document numbers. 
@@ -3362,7 +3365,7 @@ BlinkID extracts data from driver’s licenses that contain single line MRZ:
         - `enableMrzVisa` lets you scan MRZ on visa documents.
         - `enableMrzPassport` lets you scan MRZ on passports.
         - `enablePhotoId` lets you scan photo IDs. Use it to enable or disable document and face image extraction on unsupported documents.
-        - `enableFullRecognition` lets you scan all data from our [supported](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) documents.
+        - `enableFullRecognition` lets you scan all data from our [supported](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) documents.
         - Your license key still controls which of the above recognition modes are allowed.
     - We have added a `MBRecognitionMode` result member describing which recognition mode was used to produce the results.
     -  We are now retrieving sex and nationality fields from the MRZ in cases where those two fields cannot be found in the document’s VIZ. Previously, we only used to do this for dates, name fields and document numbers. 
@@ -3548,7 +3551,7 @@ BlinkID extracts data from driver’s licenses that contain single line MRZ:
 
 - Introducing support for new framework format - XCFramework:
     - it contains all the necessary device and simulator architecture slices
-    - no neeed to remove simulator slices before distributing your app to the App Store as described [here](https://github.com/BlinkID/blinkid-ios#unsupported-architectures-when-submitting-app-to-app-store)
+    - no neeed to remove simulator slices before distributing your app to the App Store as described [here](https://github.com/microblink/blinkid-ios#unsupported-architectures-when-submitting-app-to-app-store)
     - for now, only available from this repo, **not available on Cocoapods**
 - We added age verification feature:
     - Now you can more easily obtain the age of the document owner in years and check whether it is above some age limit
@@ -3673,7 +3676,7 @@ BlinkID extracts data from driver’s licenses that contain single line MRZ:
 - Updates and additions:
     - added 38 new documents for `MBBlinkIdRecognizer` and `MBBlinkIdCombinedRecognizer`
         - Algeria ID, Argentina DL, Australia Victoria DL, Australia Queensland DL, Australia Western Australia DL, Belgium Resident ID, Canada British Columbia DL, Canada Ontario DL, Canada Quebec DL, Cyprus ID, Czechia DL, Czechia ID, Egypt ID, Greece DL, India ID, India Pan Card, Israel DL, Malaysia MyKid, Malaysia MyTentera, Maldives ID, Morocco ID, Nigeria DL, Paraguay ID, Portugal DL, Puerto Rico DL, Qatar DL, Russia DL, Singapore Fin Card, Singapore Resident ID, Slovakia DL, Slovenia DL, South Africa DL, South Africa ID, Thailand ID, Tunisia ID, UAE DL, Uganda ID, Vietnam ID
-    - details on each new document and the complete list of the supported documents is [here](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md)
+    - details on each new document and the complete list of the supported documents is [here](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md)
 
 - Improvements in ID scanning performance:
     - **reduced overall size impact on application for approximately 50%** when BlinkID SDK v5.1 is used, relative to size impact of the previous version (v5.0)
@@ -3741,13 +3744,13 @@ One of the main benefits that BlinkID v5 will bring is scalability and faster su
 
 BlinkID v5 mobile SDK release is currently available for native platforms.
 
-- It’s advisable to get familiar with the range of supported document types. We will keep adding support for new documents and regularly update [the list on Github](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md).
+- It’s advisable to get familiar with the range of supported document types. We will keep adding support for new documents and regularly update [the list on Github](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md).
 - If currently supported document types are not yet supported in BlinkID v5 please follow future releases.
 - To upgrade to BlinkID v5, you will need to obtain a new license key specifically for the document types that you require.
 - Already licensed production keys will continue to work as usual, until you decide to upgrade.
 - What if you require document types supported in the previous version (and not yet added in BlinkID v5) and another document type supported in BlinkID v5? That’s manageable, and in that case, we will create a custom build for you.
 
-We strongly recommend checking the [list of supported document types](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) regularly. Please star and watch this repository, and take the time to test BlinkID v5 as much as possible.
+We strongly recommend checking the [list of supported document types](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md) regularly. Please star and watch this repository, and take the time to test BlinkID v5 as much as possible.
 
 Your opinion, especially on the performance and redesigned UX is very important for future developments. We would appreciate your feedback at blinkid@microblink.com.
 
@@ -3772,7 +3775,7 @@ Your opinion, especially on the performance and redesigned UX is very important 
 
 ### New features:
     - updated `MBBlinkIdRecognizer` and `MBBlinkIdCombinedRecognizer` with new document types for different countries
-        - you can check [list of supported document types](https://github.com/BlinkID/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md)
+        - you can check [list of supported document types](https://github.com/microblink/blinkid-ios/blob/master/documentation/BlinkIDRecognizer.md)
 
 ### Minor API changes:
     - in combined recognizers results, `documentDataMatch` value is now returned as `MBDataMatchResult` enum with three possible values: `NotPerformed`,  `Failed` and `Success`
@@ -4504,7 +4507,7 @@ For any questions, you might have, we stand at your service.
     - Deprecated `PPAztecRecognizerResult` and `PPAztecRecognizerSettings`. Use Barcode Recognizer
     - Deprecated `PPBarDecoderRecognizerResult` and `PPBarDecoderRecognizerSettings`. Use Barcode Recognizer
     - Deprecated `PPZXingRecognizerResult` and `PPZXingRecognizerSettings`. Use Barcode Recognizer
-    - Added creation of customized build of framework. If your final app size is too large, you can create a customised build of MicroBlink.framework and MicroBlink.bundle which will contain only features and resources that you really need. You can see detailed explanation at [Creating customized build of BlinkID SDK](https://github.com/BlinkID/blinkid-ios/wiki/Creating-customized-build)
+    - Added creation of customized build of framework. If your final app size is too large, you can create a customised build of MicroBlink.framework and MicroBlink.bundle which will contain only features and resources that you really need. You can see detailed explanation at [Creating customized build of BlinkID SDK](https://github.com/microblink/blinkid-ios/wiki/Creating-customized-build)
     - Added US Driver's license Combined Recognizer `PPUsdlCombinedRecognizerResult` and `PPUsdlCombinedRecognizerSettings` 
     - Added Austrian ID Combined Recognizer `PPAusIDCombinedRecognizerResult` and `PPAusIDCombinedRecognizerSettings`
     - Added Czech ID Combined Recognizer `PPCzIDCombinedRecognizerResult` and `PPCzIDCombinedRecognizerSettings`

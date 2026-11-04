@@ -39,7 +39,7 @@ This guide will help you migrate your application from BlinkID v6 to the new Bli
 pod 'PPBlinkID'
 
 # Remove from Cartfile if using Carthage
-binary "https://github.com/BlinkID/blinkid-ios/blob/master/blinkid-ios.json"
+binary "https://github.com/microblink/blinkid-ios/blob/master/blinkid-ios.json"
 ```
 
 #### Add New Dependencies:
@@ -47,7 +47,7 @@ binary "https://github.com/BlinkID/blinkid-ios/blob/master/blinkid-ios.json"
 ```swift
 // Add to Swift Package Manager
 dependencies: [
-    .package(url: "https://github.com/BlinkID/blinkid-ios.git", 
+    .package(url: "https://github.com/microblink/blinkid-ios.git", 
              .upToNextMajor(from: "7.0.0"))
 ]
 ```
@@ -231,5 +231,5 @@ struct CustomScanView: View {
 
 ## Support and Resources
 
-- For API documentation: Visit the [BlinkIDVerify](http://blinkid.github.io/blinkid-sp/docs/blinkid/) and [BlinkIDVerifyUX](http://blinkid.github.io/blinkid-ios/docs/blinkidux/) documentation
+- For API documentation: Visit the [BlinkIDVerify](http://microblink.github.io/blinkid-swift-package/docs/blinkid/) and [BlinkIDVerifyUX](http://microblink.github.io/blinkid-ios/docs/blinkidux/) documentation
 - For support: Contact technical support through the support portal

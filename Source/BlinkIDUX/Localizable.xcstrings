@@ -17504,7 +17504,7 @@
         "en-GB": {
           "stringUnit": {
             "state": "translated",
-            "value": "Move farther away"
+            "value": "Move farther"
           }
         },
         "es": {
@@ -21950,7 +21950,7 @@
         "en-GB": {
           "stringUnit": {
             "state": "translated",
-            "value": "Open your passport to the page with your photo and personal details. This page shows your name, date of birth, passport number and other identifying information."
+            "value": "Open your passport to the page with your photo and personal details. This page shows your name, date of birth, passport number, and other identifying information."
           }
         },
         "es": {
@@ -23660,7 +23660,7 @@
         "en-GB": {
           "stringUnit": {
             "state": "translated",
-            "value": "Make sure the document is well lit, fully visible and free from glare."
+            "value": "Make sure the document is well lit, fully visible, and free of glare."
           }
         },
         "es": {
@@ -27422,7 +27422,7 @@
         "en-GB": {
           "stringUnit": {
             "state": "translated",
-            "value": "Document not recognised"
+            "value": "Document not recognized"
           }
         },
         "es": {
